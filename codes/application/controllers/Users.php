@@ -15,10 +15,7 @@ class Users extends CI_Controller {
             $this->load->view('users/signin');
         } 
         else {
-            echo "hello i'm hereeee index";
-            var_dump($this->session->userdata());
-            $this->load->view('users/signin');
-            // redirect("wall");
+            redirect("wall");
         }
 
     }
@@ -47,7 +44,6 @@ class Users extends CI_Controller {
         $current_user_id = $this->session->userdata('user_id');
         
         if(!$current_user_id) { 
-            echo "hello i'm gonna registeeeeerrr here";
             $this->load->view('templates/header');
             $this->load->view('users/register');
         } 
@@ -62,7 +58,7 @@ class Users extends CI_Controller {
     public function logoff() 
     {
         $this->session->sess_destroy();
-        redirect("/");   
+        redirect("users");   
     }
     
     /*  DOCU: This function is triggered when the sign in button is clicked. 
@@ -75,7 +71,7 @@ class Users extends CI_Controller {
         $result = $this->user->validate_signin_form();
         if($result != 'success') {
             $this->session->set_flashdata('input_errors', $result);
-            redirect("signin");
+            redirect("users/signin");
         } 
         else 
         {
@@ -92,7 +88,7 @@ class Users extends CI_Controller {
             else 
             {
                 $this->session->set_flashdata('input_errors', $result);
-                redirect("signin");
+                redirect("users/signin");
             }
         }
 
@@ -124,5 +120,4 @@ class Users extends CI_Controller {
             redirect("users");
         }
     }
-
 }

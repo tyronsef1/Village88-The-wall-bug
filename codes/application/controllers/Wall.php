@@ -10,17 +10,15 @@ class Wall extends CI_Controller {
     public function index()  
     {
         $user_messages = $this->message->get_messages();
-        
-        $inbox = array();
-        if(!$user_messages){
-            foreach($user_messages as $user_message) 
-            {
-                $comments = $this->comment->get_comments_from_message_id($user_message['message_id']);
-                $user_message["comments"] = $comments;
-                $inbox[] = $user_message;
-            }
-        }
 
+        $inbox = array();
+        foreach($user_messages as $user_message) 
+        {
+            $comments = $this->comment->get_comments_from_message_id($user_message['message_id']);
+            $user_message["comments"] = $comments;
+            $inbox[] = $user_message;
+        }
+        
         $param = array("first_name"=>$this->session->userdata('first_name'), "inbox"=>$inbox);
   
         $this->load->view('wall/show',$param);

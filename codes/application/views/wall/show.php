@@ -11,7 +11,7 @@
         <nav>
             <h1>CodingDojo Wall</h1>
             <p>Welcome <?=$first_name?></p>
-            <a href="<?=base_url();?>logoff">Logoff</a>
+            <a href="<?=base_url();?>users/logoff">Logoff</a>
         </nav>        
         
         <?=$this->session->flashdata('input_errors'); ?>
@@ -35,7 +35,7 @@
 <?php       }
 ?>          <form action="<?=base_url();?>wall/add_comment" method="post" class="comment_form">
                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
-                <input type="hidden" name="message_id" value="message_id"/>
+                <input type="hidden" name="message_id" value="<?=$message['message_id']?>"/>
 
                 <label for="comment_input">Post a comment</label>
                 <textarea name="comment_input"></textarea>               
